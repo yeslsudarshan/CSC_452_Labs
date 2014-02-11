@@ -1,0 +1,487 @@
+.align	dlxos.s	/^.align 2$/
+.align	trap_random.s	/^.align 2$/
+.endproc	dlxos.s	/^.endproc _osinit$/
+.endproc	dlxos.s	/^.endproc _intrhandler$/
+.endproc	dlxos.s	/^.endproc _SetIntrs$/
+.endproc	dlxos.s	/^.endproc _CurrentIntrs$/
+.endproc	dlxos.s	/^.endproc _ProcessSleep$/
+.endproc	synch.working.s	/^.endproc _isspace$/
+.endproc	synch.working.s	/^.endproc _isxdigit$/
+.endproc	synch.working.s	/^.endproc _QueueLinkInit$/
+.endproc	synch.working.s	/^.endproc _QueueNext$/
+.endproc	synch.working.s	/^.endproc _QueuePrev$/
+.endproc	synch.working.s	/^.endproc _QueueFirst$/
+.endproc	synch.working.s	/^.endproc _QueueLast$/
+.endproc	synch.working.s	/^.endproc _QueueInsertAfter$/
+.endproc	synch.working.s	/^.endproc _QueueInsertFirst$/
+.endproc	synch.working.s	/^.endproc _QueueInsertLast$/
+.endproc	synch.working.s	/^.endproc _QueueRemove$/
+.endproc	synch.working.s	/^.endproc _QueueLength$/
+.endproc	synch.working.s	/^.endproc _QueueEmpty$/
+.endproc	synch.working.s	/^.endproc _SemInit$/
+.endproc	synch.working.s	/^.endproc _SemWait$/
+.endproc	synch.working.s	/^.endproc _SemSignal$/
+.endproc	synch.working.s	/^.endproc _LockInit$/
+.endproc	synch.working.s	/^.endproc _LockAcquire$/
+.endproc	synch.working.s	/^.endproc _LockRelease$/
+.endproc	synch.working.s	/^.endproc _CondInit$/
+.endproc	synch.working.s	/^.endproc _CondWait$/
+.endproc	synch.working.s	/^.endproc _CondSignal$/
+.endproc	synch.working.s	/^.endproc _CondBroadcast$/
+.endproc	trap_random.s	/^.endproc _random$/
+.endproc	trap_random.s	/^.endproc _srandom$/
+.endproc	usertraps.s	/^.endproc _Open$/
+.endproc	usertraps.s	/^.endproc _Close$/
+.endproc	usertraps.s	/^.endproc _Read$/
+.endproc	usertraps.s	/^.endproc _Write$/
+.endproc	usertraps.s	/^.endproc _Lseek$/
+.endproc	usertraps.s	/^.endproc _Putchar$/
+.endproc	usertraps.s	/^.endproc _Printf$/
+.global	dlxos.s	/^.global _osinit$/
+.global	dlxos.s	/^.global _intrhandler$/
+.global	dlxos.s	/^.global _SetIntrs$/
+.global	dlxos.s	/^.global _CurrentIntrs$/
+.global	dlxos.s	/^.global _ProcessSleep$/
+.global	synch.working.s	/^.global _isspace$/
+.global	synch.working.s	/^.global _isxdigit$/
+.global	synch.working.s	/^.global _QueueLinkInit$/
+.global	synch.working.s	/^.global _QueueNext$/
+.global	synch.working.s	/^.global _QueuePrev$/
+.global	synch.working.s	/^.global _QueueFirst$/
+.global	synch.working.s	/^.global _QueueLast$/
+.global	synch.working.s	/^.global _QueueInsertAfter$/
+.global	synch.working.s	/^.global _QueueInsertFirst$/
+.global	synch.working.s	/^.global _QueueInsertLast$/
+.global	synch.working.s	/^.global _QueueRemove$/
+.global	synch.working.s	/^.global _QueueLength$/
+.global	synch.working.s	/^.global _QueueEmpty$/
+.global	synch.working.s	/^.global _SemInit$/
+.global	synch.working.s	/^.global _SemWait$/
+.global	synch.working.s	/^.global _SemSignal$/
+.global	synch.working.s	/^.global _LockInit$/
+.global	synch.working.s	/^.global _LockAcquire$/
+.global	synch.working.s	/^.global _LockRelease$/
+.global	synch.working.s	/^.global _CondInit$/
+.global	synch.working.s	/^.global _CondWait$/
+.global	synch.working.s	/^.global _CondSignal$/
+.global	synch.working.s	/^.global _CondBroadcast$/
+.global	trap_random.s	/^.global _random$/
+.global	trap_random.s	/^.global _srandom$/
+.global	usertraps.s	/^.global _Open$/
+.global	usertraps.s	/^.global _Close$/
+.global	usertraps.s	/^.global _Read$/
+.global	usertraps.s	/^.global _Write$/
+.global	usertraps.s	/^.global _Lseek$/
+.global	usertraps.s	/^.global _Putchar$/
+.global	usertraps.s	/^.global _Printf$/
+.proc	dlxos.s	/^.proc _osinit$/
+.proc	dlxos.s	/^.proc _intrhandler$/
+.proc	dlxos.s	/^.proc _SetIntrs$/
+.proc	dlxos.s	/^.proc _CurrentIntrs$/
+.proc	dlxos.s	/^.proc _ProcessSleep$/
+.proc	synch.working.s	/^.proc _isspace$/
+.proc	synch.working.s	/^.proc _isxdigit$/
+.proc	synch.working.s	/^.proc _QueueLinkInit$/
+.proc	synch.working.s	/^.proc _QueueNext$/
+.proc	synch.working.s	/^.proc _QueuePrev$/
+.proc	synch.working.s	/^.proc _QueueFirst$/
+.proc	synch.working.s	/^.proc _QueueLast$/
+.proc	synch.working.s	/^.proc _QueueInsertAfter$/
+.proc	synch.working.s	/^.proc _QueueInsertFirst$/
+.proc	synch.working.s	/^.proc _QueueInsertLast$/
+.proc	synch.working.s	/^.proc _QueueRemove$/
+.proc	synch.working.s	/^.proc _QueueLength$/
+.proc	synch.working.s	/^.proc _QueueEmpty$/
+.proc	synch.working.s	/^.proc _SemInit$/
+.proc	synch.working.s	/^.proc _SemWait$/
+.proc	synch.working.s	/^.proc _SemSignal$/
+.proc	synch.working.s	/^.proc _LockInit$/
+.proc	synch.working.s	/^.proc _LockAcquire$/
+.proc	synch.working.s	/^.proc _LockRelease$/
+.proc	synch.working.s	/^.proc _CondInit$/
+.proc	synch.working.s	/^.proc _CondWait$/
+.proc	synch.working.s	/^.proc _CondSignal$/
+.proc	synch.working.s	/^.proc _CondBroadcast$/
+.proc	trap_random.s	/^.proc _random$/
+.proc	trap_random.s	/^.proc _srandom$/
+.proc	usertraps.s	/^.proc _Open$/
+.proc	usertraps.s	/^.proc _Close$/
+.proc	usertraps.s	/^.proc _Read$/
+.proc	usertraps.s	/^.proc _Write$/
+.proc	usertraps.s	/^.proc _Lseek$/
+.proc	usertraps.s	/^.proc _Putchar$/
+.proc	usertraps.s	/^.proc _Printf$/
+AS	Makefile	/^AS = dlxasm$/
+ASSERT	dlxos.h	/^#define	ASSERT(cond,s)	(cond ? 0 : printf ("%s: %s/
+CC	Makefile	/^CC = gcc-dlx$/
+CFLAGS	Makefile	/^CFLAGS = -mtraps -O3$/
+Close	filesys.h	/^  int	(*Close)(int);$/
+Cond	synch.h	32
+Cond	synch.h	34
+Cond	synch.working.h	34
+Cond	synch.working.h	38
+CondBroadcast	synch.c	/^void	CondBroadcast (Cond *cond)$/
+CondInit	synch.c	/^void	CondInit (Cond *cond, Lock *lock)$/
+CondSignal	synch.c	/^void	CondSignal (Cond *cond)$/
+CondWait	synch.c	/^void	CondWait (Cond *cond)$/
+DLX_KBD_GETCHAR	traps.h	58
+DLX_KBD_INTR	traps.h	60
+DLX_KBD_NCHARSIN	traps.h	59
+DLX_KBD_NCHARSOUT	traps.h	57
+DLX_KBD_PUTCHAR	traps.h	56
+DLX_MEMSIZE_ADDRESS	memory.h	14
+DLX_PROCESS_QUANTUM	dlxos.h	12
+DLX_STATUS_FPTRUE	dlx.h	9
+DLX_STATUS_INTRMASK	dlx.h	8
+DLX_STATUS_PAGE_TABLE	dlx.h	11
+DLX_STATUS_SYSMODE	dlx.h	10
+DLX_STATUS_TLB	dlx.h	12
+DLX_TIMER_ADDRESS	traps.h	55
+Delete	filesys.h	/^  int	(*Delete)(const char *);$/
+DisableIntrs	dlxos.h	/^DisableIntrs ()$/
+Dlx	filesys.h	60
+EnableIntrs	dlxos.h	/^EnableIntrs ()$/
+FS_BUFFER_SIZE	filesys.h	33
+FS_FS_BUILTIN	filesys.h	16
+FS_FS_DLXOS	filesys.h	17
+FS_MAX_OPEN_FILES	filesys.h	35
+FS_MODE_CREATE	filesys.h	24
+FS_MODE_READ	filesys.h	19
+FS_MODE_RW	filesys.h	21
+FS_MODE_WRITE	filesys.h	20
+FS_SEEK_CUR	filesys.h	30
+FS_SEEK_END	filesys.h	31
+FS_SEEK_SET	filesys.h	29
+FdValid	filesys.c	/^FdValid (int fd)$/
+Fs	filesys.h	37
+Fs	filesys.h	44
+FsClose	filesys.c	/^FsClose (int fd)$/
+FsDelete	filesys.c	/^FsDelete (const char *name)$/
+FsDlxClose	filesys.c	/^FsDlxClose (int f)$/
+FsDlxDelete	filesys.c	/^FsDlxDelete (const char *file)$/
+FsDlxInfo	filesys.h	50
+FsDlxInfo	filesys.h	52
+FsDlxIo	filesys.c	/^FsDlxIo (int fd, char *buf, int n, int which)$/
+FsDlxOpen	filesys.c	/^FsDlxOpen (int f, const char *name, int mode)$/
+FsDlxRead	filesys.c	/^FsDlxRead (int fd, char *buf, int n)$/
+FsDlxSeek	filesys.c	/^FsDlxSeek (int f, int offset, int whence)$/
+FsDlxWrite	filesys.c	/^FsDlxWrite (int fd, char *buf, int n)$/
+FsFreeEntry	filesys.c	/^FsFreeEntry (int x)$/
+FsModuleInit	filesys.c	/^FsModuleInit ()$/
+FsOpen	filesys.c	/^FsOpen (const char *name, int mode)$/
+FsOpenFile	filesys.h	54
+FsOpenFile	filesys.h	62
+FsRead	filesys.c	/^FsRead (int fd, char *buf, int n)$/
+FsSeek	filesys.c	/^FsSeek (int fd, int offset, int whence)$/
+FsUnixClose	filesys.c	/^FsUnixClose (int x)$/
+FsUnixDelete	filesys.c	/^FsUnixDelete (const char *name)$/
+FsUnixInfo	filesys.h	46
+FsUnixInfo	filesys.h	48
+FsUnixOpen	filesys.c	/^FsUnixOpen (int x, const char *name, int mode)$/
+FsUnixRead	filesys.c	/^FsUnixRead (int x, char *buf, int n)$/
+FsUnixSeek	filesys.c	/^FsUnixSeek (int x, int offset, int where)$/
+FsUnixWrite	filesys.c	/^FsUnixWrite (int x, char *buf, int n)$/
+FsWrite	filesys.c	/^FsWrite (int fd, char *buf, int n)$/
+INCS	Makefile	/^INCS = dlxos.h traps.h filesys.h memory.h misc.h p/
+KbdModuleInit	traps.c	/^KbdModuleInit ()$/
+L106	synch.working.s	/^L106:$/
+L107	synch.working.s	/^L107:$/
+L108	synch.working.s	/^L108:$/
+L11	synch.working.s	/^L11:$/
+L12	synch.working.s	/^L12:$/
+L38	synch.working.s	/^L38:$/
+L48	synch.working.s	/^L48:$/
+L49	synch.working.s	/^L49:$/
+L5	synch.working.s	/^L5:$/
+L50	synch.working.s	/^L50:$/
+L52	synch.working.s	/^L52:$/
+L53	synch.working.s	/^L53:$/
+L58	synch.working.s	/^L58:$/
+L59	synch.working.s	/^L59:$/
+L6	synch.working.s	/^L6:$/
+L60	synch.working.s	/^L60:$/
+L63	synch.working.s	/^L63:$/
+L64	synch.working.s	/^L64:$/
+L65	synch.working.s	/^L65:$/
+L78	synch.working.s	/^L78:$/
+L80	synch.working.s	/^L80:$/
+L89	synch.working.s	/^L89:$/
+L91	synch.working.s	/^L91:$/
+L95	synch.working.s	/^L95:$/
+LC0	synch.working.s	/^LC0:$/
+LC1	synch.working.s	/^LC1:$/
+LC2	synch.working.s	/^LC2:$/
+LC3	synch.working.s	/^LC3:$/
+Link	queue.h	19
+Link	queue.h	24
+Lock	synch.h	28
+Lock	synch.h	30
+Lock	synch.working.h	28
+Lock	synch.working.h	32
+LockAcquire	synch.c	/^LockAcquire (Lock *lock)$/
+LockInit	synch.c	/^LockInit (Lock *lock)$/
+LockRelease	synch.c	/^void	LockRelease (Lock *lock)$/
+MEMORY_L1_PAGE_SIZE_BITS	memory.h	25
+MEMORY_L2_PAGE_SIZE_BITS	memory.h	26
+MEMORY_MAX_PAGES	memory.h	30
+MEMORY_PAGE_MASK	memory.h	29
+MEMORY_PAGE_SIZE	memory.h	27
+MEMORY_PTE_DIRTY	memory.h	35
+MEMORY_PTE_MASK	memory.h	38
+MEMORY_PTE_REFERENCED	memory.h	37
+MEMORY_PTE_VALID	memory.h	33
+Makefile.depend	Makefile	/^Makefile.depend: depend$/
+MemoryAllocPage	memory.c	/^MemoryAllocPage ()$/
+MemoryCopySystemToUser	memory.c	/^MemoryCopySystemToUser (PCB *pcb, unsigned char *f/
+MemoryCopyUserToSystem	memory.c	/^MemoryCopyUserToSystem (PCB *pcb, unsigned char *f/
+MemoryFreePage	memory.c	/^MemoryFreePage(uint32 page)$/
+MemoryFreePte	memory.c	/^MemoryFreePte (uint32 pte)$/
+MemoryGetOperandAddress	memory.c	/^MemoryGetOperandAddress (PCB *pcb, uint32 instr)$/
+MemoryGetSize	memory.c	/^MemoryGetSize ()$/
+MemoryModuleInit	memory.c	/^MemoryModuleInit ()$/
+MemoryPteToPage	memory.c	/^MemoryPteToPage (uint32 pte)$/
+MemorySetFreemap	memory.c	/^MemorySetFreemap (int p, int b)$/
+MemorySetupPte	memory.c	/^MemorySetupPte (uint32 page)$/
+MemoryTranslateUserToSystem	memory.c	/^MemoryTranslateUserToSystem (PCB *pcb, uint32 addr/
+Mprocess	process.c	/^main (int argc, char *argv[])$/
+Muserprog	userprog.c	/^main (int x)$/
+NULL	queue.h	14
+OBJS	Makefile	/^OBJS = $(addsuffix .o, $(basename $(SRCS)))$/
+Open	filesys.h	/^  int	(*Open)(int, const char *, int);$/
+PCB	process.h	32
+PCB	process.h	41
+PROCESS_INIT_ISR_SYS	process.h	17
+PROCESS_INIT_ISR_USER	process.h	18
+PROCESS_MAX_PROCS	process.h	15
+PROCESS_STACK_CAUSE	process.h	51
+PROCESS_STACK_FAULT	process.h	52
+PROCESS_STACK_FRAME_SIZE	process.h	57
+PROCESS_STACK_FREG	process.h	48
+PROCESS_STACK_IAR	process.h	49
+PROCESS_STACK_IREG	process.h	45
+PROCESS_STACK_ISR	process.h	50
+PROCESS_STACK_PREV_FRAME	process.h	56
+PROCESS_STACK_PTBASE	process.h	53
+PROCESS_STACK_PTBITS	process.h	55
+PROCESS_STACK_PTSIZE	process.h	54
+PROCESS_STATUS_FREE	process.h	20
+PROCESS_STATUS_MASK	process.h	25
+PROCESS_STATUS_RUNNABLE	process.h	21
+PROCESS_STATUS_STARTING	process.h	23
+PROCESS_STATUS_WAITING	process.h	22
+PROCESS_STATUS_ZOMBIE	process.h	24
+PROCESS_TYPE_SYSTEM	process.h	26
+PROCESS_TYPE_USER	process.h	27
+ProcessDestroy	process.c	/^ProcessDestroy (PCB *pcb)$/
+ProcessExit	process.c	/^ProcessExit ()$/
+ProcessFork	process.c	/^ProcessFork (VoidFunc func, uint32 param, char *na/
+ProcessFreeResources	process.c	/^ProcessFreeResources (PCB *pcb)$/
+ProcessGetCodeInfo	process.c	/^ProcessGetCodeInfo (const char *file, uint32 *star/
+ProcessGetFromFile	process.c	/^ProcessGetFromFile (int fd, unsigned char *buf, ui/
+ProcessModuleInit	process.c	/^ProcessModuleInit ()$/
+ProcessSchedule	process.c	/^ProcessSchedule ()$/
+ProcessSetResult	process.c	/^ProcessSetResult (PCB * pcb, uint32 result)$/
+ProcessSetStatus	process.c	/^ProcessSetStatus (PCB *pcb, int status)$/
+ProcessSuspend	process.c	/^ProcessSuspend (PCB *suspend)$/
+ProcessWakeup	process.c	/^ProcessWakeup (PCB *wakeup)$/
+QUEUE_MAX_LINKS	queue.h	17
+Queue	queue.h	26
+Queue	queue.h	30
+QueueAllocLink	queue.c	/^QueueAllocLink ()$/
+QueueEmpty	queue.h	/^QueueEmpty (Queue *q)$/
+QueueFirst	queue.h	/^QueueFirst (Queue *q)$/
+QueueFreeLink	queue.c	/^QueueFreeLink (Link *l)$/
+QueueInit	queue.c	/^QueueInit (Queue *q)$/
+QueueInsertAfter	queue.h	/^QueueInsertAfter (Queue *q, Link *after, Link *l)$/
+QueueInsertFirst	queue.h	/^QueueInsertFirst (Queue *q, Link *l)$/
+QueueInsertLast	queue.h	/^QueueInsertLast (Queue *q, Link *l)$/
+QueueLast	queue.h	/^QueueLast (Queue *q)$/
+QueueLength	queue.h	/^QueueLength (Queue *q)$/
+QueueLinkInit	queue.h	/^QueueLinkInit (Link *l, void *obj)$/
+QueueModuleInit	queue.c	/^QueueModuleInit ()$/
+QueueNext	queue.h	/^QueueNext (Link *l)$/
+QueuePrev	queue.h	/^QueuePrev (Link *l)$/
+QueueRemove	queue.h	/^QueueRemove (Link *l)$/
+Read	filesys.h	/^  int	(*Read)(int, char *, int);$/
+RestoreIntrs	dlxos.h	/^RestoreIntrs (int intrs)$/
+SRCS	Makefile	/^SRCS = filesys.c memory.c misc.c process.c queue.c/
+Seek	filesys.h	/^  int	(*Seek)(int, int, int);$/
+Sem	synch.h	19
+Sem	synch.h	22
+Sem	synch.working.h	19
+Sem	synch.working.h	22
+SemInit	synch.c	/^SemInit (Sem *sem, int count)$/
+SemSignal	synch.c	/^SemSignal (Sem *sem)$/
+SemWait	synch.c	/^SemWait (Sem *sem)$/
+SysprocCreateProcesses	sysproc.c	/^SysprocCreateProcesses ()$/
+TRAP_ACCESS	traps.h	18
+TRAP_ADDRESS	traps.h	17
+TRAP_CLOSE	traps.h	40
+TRAP_CONTEXT_SWITCH	traps.h	46
+TRAP_DELETE	traps.h	41
+TRAP_DIV0	traps.h	20
+TRAP_EXIT	traps.h	42
+TRAP_FORMAT	traps.h	22
+TRAP_GETPID	traps.h	52
+TRAP_ILLEGALINST	traps.h	16
+TRAP_KBD	traps.h	26
+TRAP_LSEEK	traps.h	37
+TRAP_OPEN	traps.h	39
+TRAP_OVERFLOW	traps.h	19
+TRAP_PAGEFAULT	traps.h	23
+TRAP_PRINTF	traps.h	34
+TRAP_PRIVILEGE	traps.h	21
+TRAP_PROCESS_FORK	traps.h	51
+TRAP_PROCESS_SLEEP	traps.h	49
+TRAP_PROCESS_WAKEUP	traps.h	50
+TRAP_READ	traps.h	35
+TRAP_SEEK	traps.h	38
+TRAP_SEM_SIGNAL	traps.h	48
+TRAP_SEM_WAIT	traps.h	47
+TRAP_STACK_SIZE	traps.h	62
+TRAP_TIMER	traps.h	25
+TRAP_TLBFAULT	traps.h	24
+TRAP_TRAP_INSTR	traps.h	29
+TRAP_WRITE	traps.h	36
+TimerSet	traps.c	/^TimerSet (int us)$/
+TrapPrintfHandler	traps.c	/^TrapPrintfHandler (uint32 *trapArgs, int sysMode)$/
+Unix	filesys.h	59
+VoidFunc	process.h	29
+Write	filesys.h	/^  int	(*Write)(int, char *, int);$/
+_Close	usertraps.s	/^_Close:		$/
+_CondBroadcast	synch.working.s	/^_CondBroadcast:$/
+_CondInit	synch.working.s	/^_CondInit:$/
+_CondSignal	synch.working.s	/^_CondSignal:$/
+_CondWait	synch.working.s	/^_CondWait:$/
+_CurrentIntrs	dlxos.s	/^_CurrentIntrs:$/
+_LockAcquire	synch.working.s	/^_LockAcquire:$/
+_LockInit	synch.working.s	/^_LockInit:$/
+_LockRelease	synch.working.s	/^_LockRelease:$/
+_Lseek	usertraps.s	/^_Lseek:		$/
+_Open	usertraps.s	/^_Open:		$/
+_Printf	usertraps.s	/^_Printf:		$/
+_ProcessSleep	dlxos.s	/^_ProcessSleep:	$/
+_Putchar	usertraps.s	/^_Putchar:		$/
+_QueueEmpty	synch.working.s	/^_QueueEmpty:$/
+_QueueFirst	synch.working.s	/^_QueueFirst:$/
+_QueueInsertAfter	synch.working.s	/^_QueueInsertAfter:$/
+_QueueInsertFirst	synch.working.s	/^_QueueInsertFirst:$/
+_QueueInsertLast	synch.working.s	/^_QueueInsertLast:$/
+_QueueLast	synch.working.s	/^_QueueLast:$/
+_QueueLength	synch.working.s	/^_QueueLength:$/
+_QueueLinkInit	synch.working.s	/^_QueueLinkInit:$/
+_QueueNext	synch.working.s	/^_QueueNext:$/
+_QueuePrev	synch.working.s	/^_QueuePrev:$/
+_QueueRemove	synch.working.s	/^_QueueRemove:$/
+_Read	usertraps.s	/^_Read:		$/
+_SemInit	synch.working.s	/^_SemInit:$/
+_SemSignal	synch.working.s	/^_SemSignal:$/
+_SemWait	synch.working.s	/^_SemWait:$/
+_SetIntrs	dlxos.s	/^_SetIntrs:$/
+_Write	usertraps.s	/^_Write:		$/
+_dlx_h_	dlx.h	6
+_dlxos_h_	dlxos.h	6
+_dlxtraps_h_	traps.h	14
+_filesys_h_	filesys.h	14
+_intrhandler	dlxos.s	/^_intrhandler:$/
+_intrreturn	dlxos.s	/^_intrreturn:$/
+_isspace	synch.working.s	/^_isspace:$/
+_isxdigit	synch.working.s	/^_isxdigit:$/
+_lastosaddress	osend.s	/^_lastosaddress:$/
+_memory_h_	memory.h	10
+_misc_h_	misc.h	6
+_osinit	dlxos.s	/^_osinit:$/
+_process_h_	process.h	10
+_queue_h_	queue.h	11
+_random	trap_random.s	/^_random:		$/
+_srandom	trap_random.s	/^_srandom:		$/
+_synch_h_	synch.h	15
+_synch_h_	synch.working.h	15
+_syscall_h_	syscall.h	9
+bcopy	misc.c	/^bcopy (char *src, char *dst, int count)$/
+buffer	filesys.h	57
+bzero	misc.c	/^bzero (char *dst, int count)$/
+chaseTail	sysproc.c	/^chaseTail (int me)$/
+clean	Makefile	/^clean:$/
+condLock	synch.working.h	35
+condSem	synch.working.h	36
+count	synch.h	21
+count	synch.working.h	21
+curpos	filesys.h	51
+currentPCB	process.c	19
+currentSavedFrame	process.h	33
+dbprintf	dlxos.h	/^#define	dbprintf(flag, format, args...) 		\\$/
+debugstr	process.c	47
+depend	Makefile	/^depend: $(SRCS) $(INCS)$/
+dindex	misc.c	/^dindex (const char *s, int c)$/
+ditoa	misc.c	/^ditoa (int n, char *buf)$/
+dlxos.o	Makefile	/^dlxos.o: dlxos.s$/
+dmindex	misc.c	/^dmindex (const char *s, const char *match)$/
+doSomething	sysproc.c	/^doSomething (int me)$/
+dointerrupt	traps.c	/^dointerrupt (unsigned int cause, unsigned int iar,/
+dstrcat	misc.c	/^dstrcat (char *onto, const char *addn)$/
+dstrcpy	misc.c	/^dstrcpy (char *to, const char *from)$/
+dstrlen	misc.c	/^dstrlen (const char *s)$/
+dstrncmp	misc.c	/^dstrncmp (const char *s1, const char *s2, int n)$/
+dstrncpy	misc.c	/^dstrncpy (char *to, const char *from, int n)$/
+dstrstr	misc.c	/^dstrstr (const char *buf, const char *pattern)$/
+dstrtol	misc.c	/^dstrtol (char *c,  char **newpos, int base)$/
+emptyLoop	sysproc.c	/^emptyLoop (int me)$/
+fd	filesys.h	47
+first	queue.h	27
+flags	filesys.h	56
+flags	process.h	36
+freeLinks	queue.c	11
+freemapmax	memory.c	14
+freepages	memory.c	16
+freepcbs	process.c	22
+fs	filesys.c	17
+fs	filesys.h	55
+getxvalue	process.c	/^getxvalue (int x)$/
+intrSaveReg	dlxos.s	/^intrSaveReg:$/
+intrSystem	dlxos.s	/^intrSystem:$/
+invert	memory.c	/^invert (uint32 n)$/
+isspace	misc.h	/^isspace (char c)$/
+isxdigit	misc.h	/^isxdigit (char c)$/
+l	process.h	40
+last	queue.h	28
+linkpool	queue.c	12
+moveBetweenSpaces	memory.c	/^moveBetweenSpaces (PCB *pcb, unsigned char *s, uns/
+mutex	synch.working.h	29
+mysems	sysproc.c	18
+name	process.h	37
+negativeone	memory.c	17
+next	queue.h	20
+nfreepages	memory.c	15
+nitems	queue.h	29
+npages	process.h	39
+npri	synch.working.h	31
+nwaiters	synch.working.h	37
+object	queue.h	23
+openfiles	filesys.c	20
+os.dlx	Makefile	/^os.dlx: $(OBJS) dlxos.o trap_random.o osend.o$/
+os.dlx.obj	Makefile	/^os.dlx.obj: os.dlx$/
+osend.o	Makefile	/^osend.o: osend.s$/
+pagestart	memory.c	13
+pagetable	process.h	38
+pcbs	process.c	39
+prev	queue.h	21
+pri	synch.working.h	30
+processQuantum	process.c	44
+queue	queue.h	22
+randomStuff	sysproc.c	/^randomStuff (int seed)$/
+rcsid	filesys.c	9
+rcsid	memory.c	6
+rcsid	traps.c	7
+runQueue	process.c	26
+sysStackArea	process.h	35
+sysStackPtr	process.h	34
+trap_random.o	Makefile	/^trap_random.o: trap_random.s$/
+u	filesys.h	61
+uint32	dlxos.h	10
+userprog	Makefile	/^userprog : userprog.o usertraps.o$/
+usertraps.o	Makefile	/^usertraps.o: usertraps.s$/
+waitQueue	process.c	31
+waiting	synch.h	20
+waiting	synch.working.h	20
+zombieQueue	process.c	35
