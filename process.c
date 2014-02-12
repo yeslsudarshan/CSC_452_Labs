@@ -653,10 +653,11 @@ ProcessGetFromFile (int fd, unsigned char *buf, uint32 *addr, int max)
   return (nbytes);
 }
 
-/*Sudarshan Sargur*/
+ /*Sudarshan Sargur*/
 int Getpid()
-{
-	return (pcbs - currentPCB);
+{ printf("Current PCB %d \n  pcbs  %d ",currentPCB,pcbs);
+  
+	return (currentPCB-pcbs);
 }
 
 //----------------------------------------------------------------------

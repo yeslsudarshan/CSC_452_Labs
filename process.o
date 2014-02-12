@@ -3032,21 +3032,37 @@ L298:
 	jr	r31
 	nop
 .endproc _ProcessGetFromFile
+.data
+	.align 2
+LC43:
+	.ascii "Current PCB %d \n  pcbs  %d \000"
+.text
 	.align 2
 .proc _Getpid
 .global _Getpid
 _Getpid:
-;  Function 'Getpid'; 0 bytes of locals, 1 regs to save.
+;  Function 'Getpid'; 0 bytes of locals, 3 regs to save.
 	sw	-4(r29),r30	; push fp
 	add	r30,r0,r29	; fp = sp
 	sw	-8(r29),r31	; push ret addr
-	subui	r29,r29,#16	; alloc local storage
+	subui	r29,r29,#24	; alloc local storage
 	sw	0(r29),r2
-	lhi	r1,((_currentPCB)>>16)&0xffff
-	addui	r1,r1,(_currentPCB)&0xffff
-	lw	r2,(r1)
-	lhi	r1,((_pcbs)>>16)&0xffff
-	addui	r1,r1,(_pcbs)&0xffff
+	sw	4(r29),r3
+	sw	8(r29),r4
+	addi	r29,r29,#-16
+	lhi	r4,((LC43)>>16)&0xffff
+	addui	r4,r4,(LC43)&0xffff
+	sw	(r29),r4
+	lhi	r3,((_currentPCB)>>16)&0xffff
+	addui	r3,r3,(_currentPCB)&0xffff
+	lw	r1,(r3)
+	sw	4(r29),r1
+	lhi	r2,((_pcbs)>>16)&0xffff
+	addui	r2,r2,(_pcbs)&0xffff
+	sw	8(r29),r2
+	jal	_printf
+	nop	; not filled.
+	lw	r1,(r3)
 	sub	r2,r1,r2
 	lhi	r1,#-23302
 	addui	r1,r1,#20389
@@ -3055,7 +3071,10 @@ _Getpid:
 	mult	f0,f0,f1
 	movfp2i	r1,f0
 	srai	r1,r1,#0x2
+	addi	r29,r29,#16
 	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
 	lw	r31,-8(r30)
 	add	r29,r0,r30
 	lw	r30,-4(r30)
@@ -3067,54 +3086,54 @@ _Getpid:
 _temppcb62:
 	.space 180
 	.align 2
-LC43:
+LC44:
 	.ascii "Got %d arguments.\n\000"
 	.align 2
-LC44:
+LC45:
 	.ascii "Available memory: 0x%x -> 0x%x.\n\000"
 	.align 2
-LC45:
+LC46:
 	.ascii "Argument count is %d.\n\000"
 	.align 2
-LC46:
+LC47:
 	.ascii "Argument %d is %s.\n\000"
 	.align 2
-LC47:
+LC48:
 	.ascii "Converted %s to %d=%s\n\000"
 _buf63:
 	.space 200
 	.align 2
-LC48:
+LC49:
 	.ascii "%08x: %02x%02x%02x%02x\n\000"
 	.align 2
-LC49:
+LC50:
 	.ascii "Option %s not recognized.\n\000"
 	.align 2
-LC50:
+LC51:
 	.ascii "About to initialize queues.\n\000"
 	.align 2
-LC51:
+LC52:
 	.ascii "After initializing queues.\n\000"
 	.align 2
-LC52:
+LC53:
 	.ascii "After initializing memory.\n\000"
 	.align 2
-LC53:
+LC54:
 	.ascii "After initializing processes.\n\000"
 	.align 2
-LC54:
+LC55:
 	.ascii "After initializing keyboard.\n\000"
 	.align 2
-LC55:
+LC56:
 	.ascii "vm\000"
 	.align 2
-LC56:
+LC57:
 	.ascii "VM Descriptor is %d\n\000"
 	.align 2
-LC57:
+LC58:
 	.ascii "Created processes - about to set timer quantum.\n\000"
 	.align 2
-LC58:
+LC59:
 	.ascii "Set timer quantum to %d, about to run first process.\n\000"
 .text
 	.align 2
@@ -3135,8 +3154,8 @@ _main:
 	addi	r19,r0,(#0x0)&0xff
 	sb	(r1),r19
 	addi	r29,r29,#-8
-	lhi	r19,((LC43)>>16)&0xffff
-	addui	r19,r19,(LC43)&0xffff
+	lhi	r19,((LC44)>>16)&0xffff
+	addui	r19,r19,(LC44)&0xffff
 	sw	(r29),r19
 	sw	4(r29),r12
 	jal	_printf
@@ -3144,8 +3163,8 @@ _main:
 	jal	_MemoryGetSize
 	nop	; not filled.
 	addi	r29,r29,#-8
-	lhi	r19,((LC44)>>16)&0xffff
-	addui	r19,r19,(LC44)&0xffff
+	lhi	r19,((LC45)>>16)&0xffff
+	addui	r19,r19,(LC45)&0xffff
 	sw	(r29),r19
 	lhi	r2,((_lastosaddress)>>16)&0xffff
 	addui	r2,r2,(_lastosaddress)&0xffff
@@ -3154,8 +3173,8 @@ _main:
 	sw	8(r29),r1
 	jal	_printf
 	nop	; not filled.
-	lhi	r19,((LC45)>>16)&0xffff
-	addui	r19,r19,(LC45)&0xffff
+	lhi	r19,((LC46)>>16)&0xffff
+	addui	r19,r19,(LC46)&0xffff
 	sw	(r29),r19
 	sw	4(r29),r12
 	jal	_printf
@@ -3168,8 +3187,8 @@ _main:
 	lw	r2,4(r30)
 L309:
 	addi	r29,r29,#-16
-	lhi	r19,((LC46)>>16)&0xffff
-	addui	r19,r19,(LC46)&0xffff
+	lhi	r19,((LC47)>>16)&0xffff
+	addui	r19,r19,(LC47)&0xffff
 	sw	(r29),r19
 	sw	4(r29),r9
 	lw	r19,(r2)
@@ -3252,8 +3271,8 @@ L318:
 	sw	4(r29),r13
 	jal	_ditoa
 	nop	; not filled.
-	lhi	r19,((LC47)>>16)&0xffff
-	addui	r19,r19,(LC47)&0xffff
+	lhi	r19,((LC48)>>16)&0xffff
+	addui	r19,r19,(LC48)&0xffff
 	sw	(r29),r19
 	lw	r1,(r8)
 	sw	4(r29),r1
@@ -3345,8 +3364,8 @@ L320:
 	add	r4,r0,r15
 L326:
 	addi	r29,r29,#-24
-	lhi	r19,((LC48)>>16)&0xffff
-	addui	r19,r19,(LC48)&0xffff
+	lhi	r19,((LC49)>>16)&0xffff
+	addui	r19,r19,(LC49)&0xffff
 	sw	(r29),r19
 	lw	r1,-152(r30)
 	add	r1,r1,r2
@@ -3388,8 +3407,8 @@ L328:
 	nop	; not filled.
 L329:
 	addi	r29,r29,#-8
-	lhi	r19,((LC49)>>16)&0xffff
-	addui	r19,r19,(LC49)&0xffff
+	lhi	r19,((LC50)>>16)&0xffff
+	addui	r19,r19,(LC50)&0xffff
 	sw	(r29),r19
 	lw	r1,(r8)
 	sw	4(r29),r1
@@ -3428,8 +3447,8 @@ L312:
 	nop	; not filled.
 L334:
 	addi	r29,r29,#-8
-	lhi	r19,((LC50)>>16)&0xffff
-	addui	r19,r19,(LC50)&0xffff
+	lhi	r19,((LC51)>>16)&0xffff
+	addui	r19,r19,(LC51)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop	; not filled.
@@ -3461,8 +3480,8 @@ L333:
 	nop	; not filled.
 L336:
 	addi	r29,r29,#-8
-	lhi	r19,((LC51)>>16)&0xffff
-	addui	r19,r19,(LC51)&0xffff
+	lhi	r19,((LC52)>>16)&0xffff
+	addui	r19,r19,(LC52)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop	; not filled.
@@ -3494,8 +3513,8 @@ L335:
 	nop	; not filled.
 L338:
 	addi	r29,r29,#-8
-	lhi	r19,((LC52)>>16)&0xffff
-	addui	r19,r19,(LC52)&0xffff
+	lhi	r19,((LC53)>>16)&0xffff
+	addui	r19,r19,(LC53)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop	; not filled.
@@ -3527,8 +3546,8 @@ L337:
 	nop	; not filled.
 L340:
 	addi	r29,r29,#-8
-	lhi	r19,((LC53)>>16)&0xffff
-	addui	r19,r19,(LC53)&0xffff
+	lhi	r19,((LC54)>>16)&0xffff
+	addui	r19,r19,(LC54)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop	; not filled.
@@ -3560,8 +3579,8 @@ L339:
 	nop	; not filled.
 L342:
 	addi	r29,r29,#-8
-	lhi	r19,((LC54)>>16)&0xffff
-	addui	r19,r19,(LC54)&0xffff
+	lhi	r19,((LC55)>>16)&0xffff
+	addui	r19,r19,(LC55)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop	; not filled.
@@ -3577,8 +3596,8 @@ L346:
 	bnez	r1,L346
 	nop	; not filled.
 	addi	r29,r29,#-8
-	lhi	r19,((LC55)>>16)&0xffff
-	addui	r19,r19,(LC55)&0xffff
+	lhi	r19,((LC56)>>16)&0xffff
+	addui	r19,r19,(LC56)&0xffff
 	sw	(r29),r19
 	addi	r19,r0,#2
 	sw	4(r29),r19
@@ -3608,8 +3627,8 @@ L346:
 	nop	; not filled.
 L349:
 	addi	r29,r29,#-8
-	lhi	r19,((LC56)>>16)&0xffff
-	addui	r19,r19,(LC56)&0xffff
+	lhi	r19,((LC57)>>16)&0xffff
+	addui	r19,r19,(LC57)&0xffff
 	sw	(r29),r19
 	sw	4(r29),r9
 	jal	_printf
@@ -3675,8 +3694,8 @@ L350:
 	nop	; not filled.
 L352:
 	addi	r29,r29,#-8
-	lhi	r19,((LC57)>>16)&0xffff
-	addui	r19,r19,(LC57)&0xffff
+	lhi	r19,((LC58)>>16)&0xffff
+	addui	r19,r19,(LC58)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop	; not filled.
@@ -3712,8 +3731,8 @@ L351:
 	nop	; not filled.
 L354:
 	addi	r29,r29,#-8
-	lhi	r19,((LC58)>>16)&0xffff
-	addui	r19,r19,(LC58)&0xffff
+	lhi	r19,((LC59)>>16)&0xffff
+	addui	r19,r19,(LC59)&0xffff
 	sw	(r29),r19
 	lw	r1,(r3)
 	sw	4(r29),r1

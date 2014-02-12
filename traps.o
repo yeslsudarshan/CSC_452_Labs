@@ -1216,7 +1216,7 @@ L122:
 	nop	; not filled.
 	addi	r29,r29,#8
 	snei	r1,r1,#0
-	beqz	r1,L131
+	beqz	r1,L123
 	nop	; not filled.
 L124:
 	addi	r29,r29,#-8
@@ -1224,6 +1224,19 @@ L124:
 	addui	r7,r7,(LC7)&0xffff
 	sw	(r29),r7
 	jal	_printf
+	nop	; not filled.
+	addi	r29,r29,#8
+L123:
+	jal	_Getpid
+	nop	; not filled.
+	add	r2,r0,r1
+	addi	r29,r29,#-8
+	lhi	r1,((_currentPCB)>>16)&0xffff
+	addui	r1,r1,(_currentPCB)&0xffff
+	lw	r1,(r1)
+	sw	(r29),r1
+	sw	4(r29),r2
+	jal	_ProcessSetResult
 	nop	; not filled.
 	j	L151
 	nop	; not filled.

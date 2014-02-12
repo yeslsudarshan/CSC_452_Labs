@@ -1,7 +1,7 @@
 ; Linked by DLX-LD.
 ; MemSize 90112
-; Data size: 33552
-; Text size: 37300
+; Data size: 33580
+; Text size: 37404
 ; Stack size: 8192
 .text 0x1000
 .data 0xb000
@@ -7169,21 +7169,37 @@ L298_LF5:
 	jr	r31
 	nop
 .endproc _ProcessGetFromFile
+.data
+.align 2
+LC43_LF5:
+.ascii "Current PCB %d \n  pcbs  %d \000"
+.text
 .align 2
 .proc _Getpid
 .global _Getpid
 _Getpid:
-;  Function 'Getpid'; 0 bytes of locals, 1 regs to save.
+;  Function 'Getpid'; 0 bytes of locals, 3 regs to save.
 	sw	-4(r29),r30; push fp
 	add	r30,r0,r29; fp = sp
 	sw	-8(r29),r31; push ret addr
-	subui	r29,r29,#16; alloc local storage
+	subui	r29,r29,#24; alloc local storage
 	sw	0(r29),r2
-	lhi	r1,((_currentPCB)>>16)&0xffff
-	addui	r1,r1,(_currentPCB)&0xffff
-	lw	r2,(r1)
-	lhi	r1,((_pcbs_LF5)>>16)&0xffff
-	addui	r1,r1,(_pcbs_LF5)&0xffff
+	sw	4(r29),r3
+	sw	8(r29),r4
+	addi	r29,r29,#-16
+	lhi	r4,((LC43_LF5)>>16)&0xffff
+	addui	r4,r4,(LC43_LF5)&0xffff
+	sw	(r29),r4
+	lhi	r3,((_currentPCB)>>16)&0xffff
+	addui	r3,r3,(_currentPCB)&0xffff
+	lw	r1,(r3)
+	sw	4(r29),r1
+	lhi	r2,((_pcbs_LF5)>>16)&0xffff
+	addui	r2,r2,(_pcbs_LF5)&0xffff
+	sw	8(r29),r2
+	jal	_printf
+	nop; not filled.
+	lw	r1,(r3)
 	sub	r2,r1,r2
 	lhi	r1,#-23302
 	addui	r1,r1,#20389
@@ -7192,7 +7208,10 @@ _Getpid:
 	mult	f0,f0,f1
 	movfp2i	r1,f0
 	srai	r1,r1,#0x2
+	addi	r29,r29,#16
 	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
 	lw	r31,-8(r30)
 	add	r29,r0,r30
 	lw	r30,-4(r30)
@@ -7204,54 +7223,54 @@ _Getpid:
 _temppcb62_LF5:
 .space 180
 .align 2
-LC43_LF5:
+LC44_LF5:
 .ascii "Got %d arguments.\n\000"
 .align 2
-LC44_LF5:
+LC45_LF5:
 .ascii "Available memory: 0x%x -> 0x%x.\n\000"
 .align 2
-LC45_LF5:
+LC46_LF5:
 .ascii "Argument count is %d.\n\000"
 .align 2
-LC46_LF5:
+LC47_LF5:
 .ascii "Argument %d is %s.\n\000"
 .align 2
-LC47_LF5:
+LC48_LF5:
 .ascii "Converted %s to %d=%s\n\000"
 _buf63_LF5:
 .space 200
 .align 2
-LC48_LF5:
+LC49_LF5:
 .ascii "%08x: %02x%02x%02x%02x\n\000"
 .align 2
-LC49_LF5:
+LC50_LF5:
 .ascii "Option %s not recognized.\n\000"
 .align 2
-LC50_LF5:
+LC51_LF5:
 .ascii "About to initialize queues.\n\000"
 .align 2
-LC51_LF5:
+LC52_LF5:
 .ascii "After initializing queues.\n\000"
 .align 2
-LC52_LF5:
+LC53_LF5:
 .ascii "After initializing memory.\n\000"
 .align 2
-LC53_LF5:
+LC54_LF5:
 .ascii "After initializing processes.\n\000"
 .align 2
-LC54_LF5:
+LC55_LF5:
 .ascii "After initializing keyboard.\n\000"
 .align 2
-LC55_LF5:
+LC56_LF5:
 .ascii "vm\000"
 .align 2
-LC56_LF5:
+LC57_LF5:
 .ascii "VM Descriptor is %d\n\000"
 .align 2
-LC57_LF5:
+LC58_LF5:
 .ascii "Created processes - about to set timer quantum.\n\000"
 .align 2
-LC58_LF5:
+LC59_LF5:
 .ascii "Set timer quantum to %d, about to run first process.\n\000"
 .text
 .align 2
@@ -7272,8 +7291,8 @@ _main:
 	addi	r19,r0,(#0x0)&0xff
 	sb	(r1),r19
 	addi	r29,r29,#-8
-	lhi	r19,((LC43_LF5)>>16)&0xffff
-	addui	r19,r19,(LC43_LF5)&0xffff
+	lhi	r19,((LC44_LF5)>>16)&0xffff
+	addui	r19,r19,(LC44_LF5)&0xffff
 	sw	(r29),r19
 	sw	4(r29),r12
 	jal	_printf
@@ -7281,8 +7300,8 @@ _main:
 	jal	_MemoryGetSize
 	nop; not filled.
 	addi	r29,r29,#-8
-	lhi	r19,((LC44_LF5)>>16)&0xffff
-	addui	r19,r19,(LC44_LF5)&0xffff
+	lhi	r19,((LC45_LF5)>>16)&0xffff
+	addui	r19,r19,(LC45_LF5)&0xffff
 	sw	(r29),r19
 	lhi	r2,((_lastosaddress)>>16)&0xffff
 	addui	r2,r2,(_lastosaddress)&0xffff
@@ -7291,8 +7310,8 @@ _main:
 	sw	8(r29),r1
 	jal	_printf
 	nop; not filled.
-	lhi	r19,((LC45_LF5)>>16)&0xffff
-	addui	r19,r19,(LC45_LF5)&0xffff
+	lhi	r19,((LC46_LF5)>>16)&0xffff
+	addui	r19,r19,(LC46_LF5)&0xffff
 	sw	(r29),r19
 	sw	4(r29),r12
 	jal	_printf
@@ -7305,8 +7324,8 @@ _main:
 	lw	r2,4(r30)
 L309_LF5:
 	addi	r29,r29,#-16
-	lhi	r19,((LC46_LF5)>>16)&0xffff
-	addui	r19,r19,(LC46_LF5)&0xffff
+	lhi	r19,((LC47_LF5)>>16)&0xffff
+	addui	r19,r19,(LC47_LF5)&0xffff
 	sw	(r29),r19
 	sw	4(r29),r9
 	lw	r19,(r2)
@@ -7389,8 +7408,8 @@ L318_LF5:
 	sw	4(r29),r13
 	jal	_ditoa
 	nop; not filled.
-	lhi	r19,((LC47_LF5)>>16)&0xffff
-	addui	r19,r19,(LC47_LF5)&0xffff
+	lhi	r19,((LC48_LF5)>>16)&0xffff
+	addui	r19,r19,(LC48_LF5)&0xffff
 	sw	(r29),r19
 	lw	r1,(r8)
 	sw	4(r29),r1
@@ -7482,8 +7501,8 @@ L320_LF5:
 	add	r4,r0,r15
 L326_LF5:
 	addi	r29,r29,#-24
-	lhi	r19,((LC48_LF5)>>16)&0xffff
-	addui	r19,r19,(LC48_LF5)&0xffff
+	lhi	r19,((LC49_LF5)>>16)&0xffff
+	addui	r19,r19,(LC49_LF5)&0xffff
 	sw	(r29),r19
 	lw	r1,-152(r30)
 	add	r1,r1,r2
@@ -7525,8 +7544,8 @@ L328_LF5:
 	nop; not filled.
 L329_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC49_LF5)>>16)&0xffff
-	addui	r19,r19,(LC49_LF5)&0xffff
+	lhi	r19,((LC50_LF5)>>16)&0xffff
+	addui	r19,r19,(LC50_LF5)&0xffff
 	sw	(r29),r19
 	lw	r1,(r8)
 	sw	4(r29),r1
@@ -7565,8 +7584,8 @@ L312_LF5:
 	nop; not filled.
 L334_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC50_LF5)>>16)&0xffff
-	addui	r19,r19,(LC50_LF5)&0xffff
+	lhi	r19,((LC51_LF5)>>16)&0xffff
+	addui	r19,r19,(LC51_LF5)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop; not filled.
@@ -7598,8 +7617,8 @@ L333_LF5:
 	nop; not filled.
 L336_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC51_LF5)>>16)&0xffff
-	addui	r19,r19,(LC51_LF5)&0xffff
+	lhi	r19,((LC52_LF5)>>16)&0xffff
+	addui	r19,r19,(LC52_LF5)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop; not filled.
@@ -7631,8 +7650,8 @@ L335_LF5:
 	nop; not filled.
 L338_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC52_LF5)>>16)&0xffff
-	addui	r19,r19,(LC52_LF5)&0xffff
+	lhi	r19,((LC53_LF5)>>16)&0xffff
+	addui	r19,r19,(LC53_LF5)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop; not filled.
@@ -7664,8 +7683,8 @@ L337_LF5:
 	nop; not filled.
 L340_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC53_LF5)>>16)&0xffff
-	addui	r19,r19,(LC53_LF5)&0xffff
+	lhi	r19,((LC54_LF5)>>16)&0xffff
+	addui	r19,r19,(LC54_LF5)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop; not filled.
@@ -7697,8 +7716,8 @@ L339_LF5:
 	nop; not filled.
 L342_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC54_LF5)>>16)&0xffff
-	addui	r19,r19,(LC54_LF5)&0xffff
+	lhi	r19,((LC55_LF5)>>16)&0xffff
+	addui	r19,r19,(LC55_LF5)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop; not filled.
@@ -7714,8 +7733,8 @@ L346_LF5:
 	bnez	r1,L346_LF5
 	nop; not filled.
 	addi	r29,r29,#-8
-	lhi	r19,((LC55_LF5)>>16)&0xffff
-	addui	r19,r19,(LC55_LF5)&0xffff
+	lhi	r19,((LC56_LF5)>>16)&0xffff
+	addui	r19,r19,(LC56_LF5)&0xffff
 	sw	(r29),r19
 	addi	r19,r0,#2
 	sw	4(r29),r19
@@ -7745,8 +7764,8 @@ L346_LF5:
 	nop; not filled.
 L349_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC56_LF5)>>16)&0xffff
-	addui	r19,r19,(LC56_LF5)&0xffff
+	lhi	r19,((LC57_LF5)>>16)&0xffff
+	addui	r19,r19,(LC57_LF5)&0xffff
 	sw	(r29),r19
 	sw	4(r29),r9
 	jal	_printf
@@ -7812,8 +7831,8 @@ L350_LF5:
 	nop; not filled.
 L352_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC57_LF5)>>16)&0xffff
-	addui	r19,r19,(LC57_LF5)&0xffff
+	lhi	r19,((LC58_LF5)>>16)&0xffff
+	addui	r19,r19,(LC58_LF5)&0xffff
 	sw	(r29),r19
 	jal	_printf
 	nop; not filled.
@@ -7849,8 +7868,8 @@ L351_LF5:
 	nop; not filled.
 L354_LF5:
 	addi	r29,r29,#-8
-	lhi	r19,((LC58_LF5)>>16)&0xffff
-	addui	r19,r19,(LC58_LF5)&0xffff
+	lhi	r19,((LC59_LF5)>>16)&0xffff
+	addui	r19,r19,(LC59_LF5)&0xffff
 	sw	(r29),r19
 	lw	r1,(r3)
 	sw	4(r29),r1
@@ -10632,7 +10651,7 @@ L122_LF8:
 	nop; not filled.
 	addi	r29,r29,#8
 	snei	r1,r1,#0
-	beqz	r1,L131_LF8
+	beqz	r1,L123_LF8
 	nop; not filled.
 L124_LF8:
 	addi	r29,r29,#-8
@@ -10640,6 +10659,19 @@ L124_LF8:
 	addui	r7,r7,(LC7_LF8)&0xffff
 	sw	(r29),r7
 	jal	_printf
+	nop; not filled.
+	addi	r29,r29,#8
+L123_LF8:
+	jal	_Getpid
+	nop; not filled.
+	add	r2,r0,r1
+	addi	r29,r29,#-8
+	lhi	r1,((_currentPCB)>>16)&0xffff
+	addui	r1,r1,(_currentPCB)&0xffff
+	lw	r1,(r1)
+	sw	(r29),r1
+	sw	4(r29),r2
+	jal	_ProcessSetResult
 	nop; not filled.
 	j	L151_LF8
 	nop; not filled.

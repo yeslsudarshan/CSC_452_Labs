@@ -1,3 +1,5 @@
+ an 	os.dlx	11673
+ an OS - 	os.lst	12467
 .align	dlxos.s	/^.align 2$/
 .align	trap_random.s	/^.align 2$/
 .endproc	dlxos.s	/^.endproc _osinit$/
@@ -37,6 +39,7 @@
 .endproc	usertraps.s	/^.endproc _Lseek$/
 .endproc	usertraps.s	/^.endproc _Putchar$/
 .endproc	usertraps.s	/^.endproc _Printf$/
+.endproc	usertraps.s	/^.endproc _Getpid$/
 .global	dlxos.s	/^.global _osinit$/
 .global	dlxos.s	/^.global _intrhandler$/
 .global	dlxos.s	/^.global _SetIntrs$/
@@ -74,6 +77,7 @@
 .global	usertraps.s	/^.global _Lseek$/
 .global	usertraps.s	/^.global _Putchar$/
 .global	usertraps.s	/^.global _Printf$/
+.global	usertraps.s	/^.global _Getpid$/
 .proc	dlxos.s	/^.proc _osinit$/
 .proc	dlxos.s	/^.proc _intrhandler$/
 .proc	dlxos.s	/^.proc _SetIntrs$/
@@ -111,11 +115,17 @@
 .proc	usertraps.s	/^.proc _Lseek$/
 .proc	usertraps.s	/^.proc _Putchar$/
 .proc	usertraps.s	/^.proc _Printf$/
+.proc	usertraps.s	/^.proc _Getpid$/
 AS	Makefile	/^AS = dlxasm$/
 ASSERT	dlxos.h	/^#define	ASSERT(cond,s)	(cond ? 0 : printf ("%s: %s/
 CC	Makefile	/^CC = gcc-dlx$/
 CFLAGS	Makefile	/^CFLAGS = -mtraps -O3$/
 Close	filesys.h	/^  int	(*Close)(int);$/
+Close	os.dlx	11571
+Close	os.lst	12378
+Close	userprog.dlx	83
+Close	userprog.lst	95
+Close	usertraps.o	6
 Cond	synch.h	32
 Cond	synch.h	34
 Cond	synch.working.h	34
@@ -124,6 +134,9 @@ CondBroadcast	synch.c	/^void	CondBroadcast (Cond *cond)$/
 CondInit	synch.c	/^void	CondInit (Cond *cond, Lock *lock)$/
 CondSignal	synch.c	/^void	CondSignal (Cond *cond)$/
 CondWait	synch.c	/^void	CondWait (Cond *cond)$/
+Copyright	dlxos.o	/^;;; Copyright (c) 1999 by Ethan Miller$/
+Copyright	os.dlx	/^;;; Copyright (c) 1999 by Ethan Miller$/
+Copyright	os.lst	/^   10                      ;;; Copyright (c) 1999 /
 DLX_KBD_GETCHAR	traps.h	58
 DLX_KBD_INTR	traps.h	60
 DLX_KBD_NCHARSIN	traps.h	59
@@ -182,7 +195,14 @@ FsUnixRead	filesys.c	/^FsUnixRead (int x, char *buf, int n)$/
 FsUnixSeek	filesys.c	/^FsUnixSeek (int x, int offset, int where)$/
 FsUnixWrite	filesys.c	/^FsUnixWrite (int x, char *buf, int n)$/
 FsWrite	filesys.c	/^FsWrite (int fd, char *buf, int n)$/
+Getpid	process.c	/^int Getpid()$/
+However	dlxos.o	50
+However	os.dlx	57
+However	os.lst	55
 INCS	Makefile	/^INCS = dlxos.h traps.h filesys.h memory.h misc.h p/
+ISR	dlxos.o	155
+ISR	os.dlx	162
+ISR	os.lst	157
 KbdModuleInit	traps.c	/^KbdModuleInit ()$/
 L106	synch.working.s	/^L106:$/
 L107	synch.working.s	/^L107:$/
@@ -231,6 +251,10 @@ MEMORY_PTE_MASK	memory.h	38
 MEMORY_PTE_REFERENCED	memory.h	37
 MEMORY_PTE_VALID	memory.h	33
 Makefile.depend	Makefile	/^Makefile.depend: depend$/
+MemSize	os.dlx	2
+MemSize	os.lst	3
+MemSize	userprog.dlx	2
+MemSize	userprog.lst	3
 MemoryAllocPage	memory.c	/^MemoryAllocPage ()$/
 MemoryCopySystemToUser	memory.c	/^MemoryCopySystemToUser (PCB *pcb, unsigned char *f/
 MemoryCopyUserToSystem	memory.c	/^MemoryCopyUserToSystem (PCB *pcb, unsigned char *f/
@@ -243,9 +267,26 @@ MemoryPteToPage	memory.c	/^MemoryPteToPage (uint32 pte)$/
 MemorySetFreemap	memory.c	/^MemorySetFreemap (int p, int b)$/
 MemorySetupPte	memory.c	/^MemorySetupPte (uint32 page)$/
 MemoryTranslateUserToSystem	memory.c	/^MemoryTranslateUserToSystem (PCB *pcb, uint32 addr/
+Miller	os.dlx	11545
+Miller	os.dlx	11569
+Miller	os.dlx	11665
+Miller	os.lst	12354
+Miller	os.lst	12376
+Miller	os.lst	12459
+Miller	userprog.dlx	81
+Miller	userprog.dlx	162
+Miller	userprog.lst	93
+Miller	userprog.lst	163
+Miller	usertraps.o	4
 Mprocess	process.c	/^main (int argc, char *argv[])$/
 Muserprog	userprog.c	/^main (int x)$/
+NOTE:	dlxos.o	134
+NOTE:	os.dlx	141
+NOTE:	os.lst	137
 NULL	queue.h	14
+Note	dlxos.o	183
+Note	os.dlx	190
+Note	os.lst	184
 OBJS	Makefile	/^OBJS = $(addsuffix .o, $(basename $(SRCS)))$/
 Open	filesys.h	/^  int	(*Open)(int, const char *, int);$/
 PCB	process.h	32
@@ -305,6 +346,11 @@ QueueRemove	queue.h	/^QueueRemove (Link *l)$/
 Read	filesys.h	/^  int	(*Read)(int, char *, int);$/
 RestoreIntrs	dlxos.h	/^RestoreIntrs (int intrs)$/
 SRCS	Makefile	/^SRCS = filesys.c memory.c misc.c process.c queue.c/
+Sawdey	os.dlx	347
+Sawdey	os.dlx	11698
+Sawdey	os.lst	335
+Sawdey	os.lst	12488
+Sawdey	trap_random.o	4
 Seek	filesys.h	/^  int	(*Seek)(int, int, int);$/
 Sem	synch.h	19
 Sem	synch.h	22
@@ -343,24 +389,52 @@ TRAP_TIMER	traps.h	25
 TRAP_TLBFAULT	traps.h	24
 TRAP_TRAP_INSTR	traps.h	29
 TRAP_WRITE	traps.h	36
+The	dlxos.o	180
+The	os.dlx	187
+The	os.lst	181
 TimerSet	traps.c	/^TimerSet (int us)$/
 TrapPrintfHandler	traps.c	/^TrapPrintfHandler (uint32 *trapArgs, int sysMode)$/
 Unix	filesys.h	59
 VoidFunc	process.h	29
+We	dlxos.o	54
+We	os.dlx	61
+We	os.lst	58
 Write	filesys.h	/^  int	(*Write)(int, char *, int);$/
 _Close	usertraps.s	/^_Close:		$/
 _CondBroadcast	synch.working.s	/^_CondBroadcast:$/
 _CondInit	synch.working.s	/^_CondInit:$/
 _CondSignal	synch.working.s	/^_CondSignal:$/
 _CondWait	synch.working.s	/^_CondWait:$/
+_CurrentIntrs	dlxos.o	322
 _CurrentIntrs	dlxos.s	/^_CurrentIntrs:$/
+_CurrentIntrs	os.dlx	329
+_CurrentIntrs	os.lst	317
+_DisableIntrs	dlxos.o	193
+_DisableIntrs	os.dlx	200
+_DisableIntrs	os.lst	194
+_Getpid	userprog.dlx	161
+_Getpid	userprog.lst	162
+_Getpid	usertraps.s	/^_Getpid:		$/
 _LockAcquire	synch.working.s	/^_LockAcquire:$/
 _LockInit	synch.working.s	/^_LockInit:$/
 _LockRelease	synch.working.s	/^_LockRelease:$/
+_Lseek	os.dlx	11660
+_Lseek	os.lst	12455
 _Lseek	usertraps.s	/^_Lseek:		$/
+_Open	userprog.dlx	97
+_Open	userprog.lst	105
+_Open	usertraps.o	20
 _Open	usertraps.s	/^_Open:		$/
+_Printf	userprog.dlx	152
+_Printf	userprog.lst	154
+_Printf	usertraps.o	75
 _Printf	usertraps.s	/^_Printf:		$/
+_ProcessSleep	dlxos.o	324
 _ProcessSleep	dlxos.s	/^_ProcessSleep:	$/
+_ProcessSleep	os.dlx	331
+_ProcessSleep	os.dlx	343
+_ProcessSleep	os.lst	319
+_ProcessSleep	os.lst	331
 _Putchar	usertraps.s	/^_Putchar:		$/
 _QueueEmpty	synch.working.s	/^_QueueEmpty:$/
 _QueueFirst	synch.working.s	/^_QueueFirst:$/
@@ -382,34 +456,91 @@ _Write	usertraps.s	/^_Write:		$/
 _dlx_h_	dlx.h	6
 _dlxos_h_	dlxos.h	6
 _dlxtraps_h_	traps.h	14
+_exit	os.dlx	11557
+_exit	os.dlx	11668
+_exit	os.lst	12365
+_exit	os.lst	12462
+_exit	userprog.dlx	174
+_exit	userprog.lst	173
+_exitsim	os.dlx	11667
+_exitsim	os.lst	12461
 _filesys_h_	filesys.h	14
+_intrhandler	dlxos.o	48
+_intrhandler	dlxos.o	174
 _intrhandler	dlxos.s	/^_intrhandler:$/
+_intrhandler	os.dlx	55
+_intrhandler	os.dlx	181
+_intrhandler	os.lst	53
+_intrhandler	os.lst	176
+_intrreturn	dlxos.o	189
 _intrreturn	dlxos.s	/^_intrreturn:$/
+_intrreturn	os.dlx	196
+_intrreturn	os.lst	190
+_isspace	filesys.o	10
+_isspace	memory.o	10
+_isspace	misc.o	6
+_isspace	os.dlx	375
+_isspace	os.lst	374
+_isspace	process.o	6
+_isspace	queue.o	6
+_isspace	synch.o	6
 _isspace	synch.working.s	/^_isspace:$/
+_isspace	sysproc.o	6
+_isspace	traps.o	10
 _isxdigit	synch.working.s	/^_isxdigit:$/
 _lastosaddress	osend.s	/^_lastosaddress:$/
+_lseek	os.dlx	11616
+_lseek	os.lst	12417
+_main	userprog.dlx	26
+_main	userprog.lst	38
+_main	userprog.o	19
 _memory_h_	memory.h	10
 _misc_h_	misc.h	6
 _osinit	dlxos.s	/^_osinit:$/
 _process_h_	process.h	10
 _queue_h_	queue.h	11
 _random	trap_random.s	/^_random:		$/
+_srandom	os.dlx	365
+_srandom	os.lst	351
 _srandom	trap_random.s	/^_srandom:		$/
 _synch_h_	synch.h	15
 _synch_h_	synch.working.h	15
 _syscall_h_	syscall.h	9
+address	osend.o	1
+align	userprog.dlx	89
+align	userprog.lst	99
+align	usertraps.o	12
+ame	dlxos.o	135
+ame	os.dlx	142
+ame	os.lst	138
+atomic	dlxos.o	190
+atomic	os.dlx	197
+atomic	os.lst	191
 bcopy	misc.c	/^bcopy (char *src, char *dst, int count)$/
 buffer	filesys.h	57
 bzero	misc.c	/^bzero (char *dst, int count)$/
 chaseTail	sysproc.c	/^chaseTail (int me)$/
 clean	Makefile	/^clean:$/
+close	os.dlx	/^;;; with names such as open and close (lower case)/
+close	os.lst	/^11573                      ;;; with names such as /
+close	userprog.dlx	/^;;; with names such as open and close (lower case)/
+close	userprog.lst	/^   85                      ;;; with names such as /
+close	usertraps.o	/^;;; with names such as open and close (lower case)/
 condLock	synch.working.h	35
 condSem	synch.working.h	36
+contents	os.lst	1
+contents	userprog.lst	1
 count	synch.h	21
 count	synch.working.h	21
+course	dlxos.o	136
+course	os.dlx	143
+course	os.lst	139
 curpos	filesys.h	51
 currentPCB	process.c	19
 currentSavedFrame	process.h	33
+currently	dlxos.o	78
+currently	os.dlx	85
+currently	os.lst	81
 dbprintf	dlxos.h	/^#define	dbprintf(flag, format, args...) 		\\$/
 debugstr	process.c	47
 depend	Makefile	/^depend: $(SRCS) $(INCS)$/
@@ -419,6 +550,10 @@ dlxos.o	Makefile	/^dlxos.o: dlxos.s$/
 dmindex	misc.c	/^dmindex (const char *s, const char *match)$/
 doSomething	sysproc.c	/^doSomething (int me)$/
 dointerrupt	traps.c	/^dointerrupt (unsigned int cause, unsigned int iar,/
+domain	os.dlx	11545
+domain	os.lst	12354
+domain	userprog.dlx	162
+domain	userprog.lst	163
 dstrcat	misc.c	/^dstrcat (char *onto, const char *addn)$/
 dstrcpy	misc.c	/^dstrcpy (char *to, const char *from)$/
 dstrlen	misc.c	/^dstrlen (const char *s)$/
@@ -426,11 +561,40 @@ dstrncmp	misc.c	/^dstrncmp (const char *s1, const char *s2, int n)$/
 dstrncpy	misc.c	/^dstrncpy (char *to, const char *from, int n)$/
 dstrstr	misc.c	/^dstrstr (const char *buf, const char *pattern)$/
 dstrtol	misc.c	/^dstrtol (char *c,  char **newpos, int base)$/
+e	dlxos.o	54
+e	os.dlx	61
+e	os.lst	58
+em 	dlxos.o	192
+em 	os.dlx	199
+em 	os.lst	193
 emptyLoop	sysproc.c	/^emptyLoop (int me)$/
+exitsim	dlxos.o	/^;;; should call exitsim() or exit() rather than re/
+exitsim	os.dlx	/^;;; should call exitsim() or exit() rather than re/
+exitsim	os.dlx	/^;;; programs run without an OS - should call exits/
+exitsim	os.lst	/^   26                      ;;; should call exitsim/
+exitsim	os.lst	/^11673                      ;;; programs run withou/
+f30	dlxos.o	131
+f30	os.dlx	138
+f30	os.lst	134
 fd	filesys.h	47
+first	os.dlx	11667
+first	os.lst	12461
 first	queue.h	27
 flags	filesys.h	56
 flags	process.h	36
+fp	filesys.o	13
+fp	memory.o	13
+fp	misc.o	9
+fp	os.dlx	378
+fp	os.lst	377
+fp	process.o	9
+fp	queue.o	9
+fp	synch.o	9
+fp	sysproc.o	9
+fp	traps.o	13
+fp	userprog.dlx	29
+fp	userprog.lst	41
+fp	userprog.o	22
 freeLinks	queue.c	11
 freemapmax	memory.c	14
 freepages	memory.c	16
@@ -438,14 +602,44 @@ freepcbs	process.c	22
 fs	filesys.c	17
 fs	filesys.h	55
 getxvalue	process.c	/^getxvalue (int x)$/
+han	dlxos.o	133
+han	os.dlx	140
+han	os.lst	136
+in	dlxos.o	49
+in	os.dlx	56
+in	os.lst	54
+instead	dlxos.o	169
+instead	os.dlx	176
+instead	os.lst	171
+interrupts	dlxos.o	190
+interrupts	os.dlx	197
+interrupts	os.lst	191
 intrSaveReg	dlxos.s	/^intrSaveReg:$/
 intrSystem	dlxos.s	/^intrSystem:$/
+intrreturn	dlxos.o	177
+intrreturn	os.dlx	184
+intrreturn	os.lst	178
 invert	memory.c	/^invert (uint32 n)$/
 isspace	misc.h	/^isspace (char c)$/
 isxdigit	misc.h	/^isxdigit (char c)$/
 l	process.h	40
 last	queue.h	28
+ld	os.dlx	11671
+ld be s	os.lst	12465
 linkpool	queue.c	12
+locals	filesys.o	11
+locals	memory.o	11
+locals	misc.o	7
+locals	os.dlx	376
+locals	os.lst	375
+locals	process.o	7
+locals	queue.o	7
+locals	synch.o	7
+locals	sysproc.o	7
+locals	traps.o	11
+locals	userprog.dlx	27
+locals	userprog.lst	39
+locals	userprog.o	20
 moveBetweenSpaces	memory.c	/^moveBetweenSpaces (PCB *pcb, unsigned char *s, uns/
 mutex	synch.working.h	29
 mysems	sysproc.c	18
@@ -454,10 +648,19 @@ negativeone	memory.c	17
 next	queue.h	20
 nfreepages	memory.c	15
 nitems	queue.h	29
+not	dlxos.o	182
+not	os.dlx	189
+not	os.lst	183
 npages	process.h	39
 npri	synch.working.h	31
 nwaiters	synch.working.h	37
+oa	dlxos.o	207
+oa	os.dlx	214
+oa	os.lst	207
 object	queue.h	23
+of	userprog.dlx	98
+of	userprog.lst	106
+of	usertraps.o	21
 openfiles	filesys.c	20
 os.dlx	Makefile	/^os.dlx: $(OBJS) dlxos.o trap_random.o osend.o$/
 os.dlx.obj	Makefile	/^os.dlx.obj: os.dlx$/
@@ -465,23 +668,374 @@ osend.o	Makefile	/^osend.o: osend.s$/
 pagestart	memory.c	13
 pagetable	process.h	38
 pcbs	process.c	39
+pointer	dlxos.o	182
+pointer	os.dlx	189
+pointer	os.lst	183
 prev	queue.h	21
+previous	dlxos.o	183
+previous	os.dlx	190
+previous	os.lst	184
+previously	dlxos.o	179
+previously	os.dlx	186
+previously	os.lst	180
 pri	synch.working.h	30
+process	dlxos.o	57
+process	dlxos.o	58
+process	os.dlx	64
+process	os.dlx	65
+process	os.lst	60
+process	os.lst	61
 processQuantum	process.c	44
+programs	os.dlx	11618
+programs	os.lst	12418
+programs	userprog.dlx	91
+programs	userprog.lst	100
+programs	usertraps.o	14
 queue	queue.h	22
+r0	filesys.o	13
+r0	memory.o	13
+r0	misc.o	9
+r0	os.dlx	378
+r0	os.lst	377
+r0	process.o	9
+r0	queue.o	9
+r0	synch.o	9
+r0	sysproc.o	9
+r0	traps.o	13
+r0	userprog.dlx	29
+r0	userprog.lst	41
+r0	userprog.o	22
+r1	dlxos.o	157
+r1	dlxos.o	196
+r1	dlxos.o	197
+r1	dlxos.o	197
+r1	dlxos.o	198
+r1	dlxos.o	302
+r1	dlxos.o	303
+r1	dlxos.o	304
+r1	dlxos.o	304
+r1	dlxos.o	305
+r1	dlxos.o	305
+r1	dlxos.o	307
+r1	dlxos.o	308
+r1	dlxos.o	308
+r1	dlxos.o	318
+r1	dlxos.o	319
+r1	dlxos.o	319
+r1	os.dlx	164
+r1	os.dlx	203
+r1	os.dlx	204
+r1	os.dlx	204
+r1	os.dlx	205
+r1	os.dlx	309
+r1	os.dlx	310
+r1	os.dlx	311
+r1	os.dlx	311
+r1	os.dlx	312
+r1	os.dlx	312
+r1	os.dlx	314
+r1	os.dlx	315
+r1	os.dlx	315
+r1	os.dlx	325
+r1	os.dlx	326
+r1	os.dlx	326
+r1	os.lst	159
+r1	os.lst	197
+r1	os.lst	198
+r1	os.lst	198
+r1	os.lst	199
+r1	os.lst	298
+r1	os.lst	299
+r1	os.lst	300
+r1	os.lst	300
+r1	os.lst	301
+r1	os.lst	301
+r1	os.lst	303
+r1	os.lst	304
+r1	os.lst	304
+r1	os.lst	313
+r1	os.lst	314
+r1	os.lst	314
+r2	dlxos.o	246
+r2	dlxos.o	299
+r2	dlxos.o	300
+r2	dlxos.o	301
+r2	dlxos.o	301
+r2	dlxos.o	305
+r2	dlxos.o	309
+r2	filesys.o	17
+r2	memory.o	17
+r2	misc.o	13
+r2	os.dlx	253
+r2	os.dlx	306
+r2	os.dlx	307
+r2	os.dlx	308
+r2	os.dlx	308
+r2	os.dlx	312
+r2	os.dlx	316
+r2	os.dlx	382
+r2	os.lst	244
+r2	os.lst	295
+r2	os.lst	296
+r2	os.lst	297
+r2	os.lst	297
+r2	os.lst	301
+r2	os.lst	305
+r2	os.lst	381
+r2	process.o	13
+r2	queue.o	13
+r2	synch.o	13
+r2	sysproc.o	13
+r2	traps.o	17
+r2	userprog.dlx	32
+r2	userprog.lst	44
+r2	userprog.o	25
+r28	dlxos.o	109
+r28	os.dlx	116
+r28	os.lst	112
+r29	dlxos.o	298
+r29	dlxos.o	298
+r29	dlxos.o	310
+r29	dlxos.o	310
+r29	filesys.o	12
+r29	filesys.o	13
+r29	filesys.o	15
+r29	filesys.o	15
+r29	memory.o	12
+r29	memory.o	13
+r29	memory.o	15
+r29	memory.o	15
+r29	misc.o	8
+r29	misc.o	9
+r29	misc.o	11
+r29	misc.o	11
+r29	os.dlx	305
+r29	os.dlx	305
+r29	os.dlx	317
+r29	os.dlx	317
+r29	os.dlx	377
+r29	os.dlx	378
+r29	os.dlx	380
+r29	os.dlx	380
+r29	os.lst	294
+r29	os.lst	294
+r29	os.lst	306
+r29	os.lst	306
+r29	os.lst	376
+r29	os.lst	377
+r29	os.lst	379
+r29	os.lst	379
+r29	process.o	8
+r29	process.o	9
+r29	process.o	11
+r29	process.o	11
+r29	queue.o	8
+r29	queue.o	9
+r29	queue.o	11
+r29	queue.o	11
+r29	synch.o	8
+r29	synch.o	9
+r29	synch.o	11
+r29	synch.o	11
+r29	sysproc.o	8
+r29	sysproc.o	9
+r29	sysproc.o	11
+r29	sysproc.o	11
+r29	traps.o	12
+r29	traps.o	13
+r29	traps.o	15
+r29	traps.o	15
+r29	userprog.dlx	28
+r29	userprog.dlx	29
+r29	userprog.dlx	31
+r29	userprog.dlx	31
+r29	userprog.lst	40
+r29	userprog.lst	41
+r29	userprog.lst	43
+r29	userprog.lst	43
+r29	userprog.o	21
+r29	userprog.o	22
+r29	userprog.o	24
+r29	userprog.o	24
+r3	dlxos.o	113
+r3	dlxos.o	114
+r3	dlxos.o	143
+r3	dlxos.o	145
+r3	dlxos.o	147
+r3	dlxos.o	149
+r3	dlxos.o	150
+r3	dlxos.o	208
+r3	os.dlx	120
+r3	os.dlx	121
+r3	os.dlx	150
+r3	os.dlx	152
+r3	os.dlx	154
+r3	os.dlx	156
+r3	os.dlx	157
+r3	os.dlx	215
+r3	os.lst	116
+r3	os.lst	117
+r3	os.lst	146
+r3	os.lst	148
+r3	os.lst	150
+r3	os.lst	152
+r3	os.lst	153
+r3	os.lst	208
+r30	dlxos.o	111
+r30	filesys.o	12
+r30	filesys.o	13
+r30	memory.o	12
+r30	memory.o	13
+r30	misc.o	8
+r30	misc.o	9
+r30	os.dlx	118
+r30	os.dlx	377
+r30	os.dlx	378
+r30	os.lst	114
+r30	os.lst	376
+r30	os.lst	377
+r30	process.o	8
+r30	process.o	9
+r30	queue.o	8
+r30	queue.o	9
+r30	synch.o	8
+r30	synch.o	9
+r30	sysproc.o	8
+r30	sysproc.o	9
+r30	traps.o	12
+r30	traps.o	13
+r30	userprog.dlx	28
+r30	userprog.dlx	29
+r30	userprog.lst	40
+r30	userprog.lst	41
+r30	userprog.o	21
+r30	userprog.o	22
+r31	dlxos.o	60
+r31	dlxos.o	61
+r31	dlxos.o	61
+r31	dlxos.o	62
+r31	dlxos.o	63
+r31	dlxos.o	64
+r31	dlxos.o	64
+r31	dlxos.o	65
+r31	os.dlx	67
+r31	os.dlx	68
+r31	os.dlx	68
+r31	os.dlx	69
+r31	os.dlx	70
+r31	os.dlx	71
+r31	os.dlx	71
+r31	os.dlx	72
+r31	os.lst	63
+r31	os.lst	64
+r31	os.lst	64
+r31	os.lst	65
+r31	os.lst	66
+r31	os.lst	67
+r31	os.lst	67
+r31	os.lst	68
+r4	dlxos.o	137
+r4	dlxos.o	154
+r4	os.dlx	144
+r4	os.dlx	161
+r4	os.lst	140
+r4	os.lst	156
+r5	dlxos.o	139
+r5	dlxos.o	155
+r5	os.dlx	146
+r5	os.dlx	162
+r5	os.lst	142
+r5	os.lst	157
+r6	dlxos.o	141
+r6	dlxos.o	153
+r6	os.dlx	148
+r6	os.dlx	160
+r6	os.lst	144
+r6	os.lst	155
 randomStuff	sysproc.c	/^randomStuff (int seed)$/
 rcsid	filesys.c	9
 rcsid	memory.c	6
 rcsid	traps.c	7
+returns	dlxos.o	169
+returns	os.dlx	176
+returns	os.lst	171
+room	dlxos.o	78
+room	os.dlx	85
+room	os.lst	81
+routine	dlxos.o	169
+routine	os.dlx	176
+routine	os.lst	171
 runQueue	process.c	26
+second	os.dlx	11668
+second	os.lst	12462
+simulator	os.dlx	11669
+simulator	os.lst	12463
+size	os.dlx	3
+size	os.dlx	4
+size	os.lst	4
+size	os.lst	5
+size	userprog.dlx	3
+size	userprog.dlx	4
+size	userprog.lst	4
+size	userprog.lst	5
+stack	dlxos.o	194
+stack	os.dlx	201
+stack	os.lst	195
+status	dlxos.o	306
+status	os.dlx	313
+status	os.lst	302
 sysStackArea	process.h	35
 sysStackPtr	process.h	34
+system	dlxos.o	57
+system	os.dlx	64
+system	os.lst	60
+the	dlxos.o	50
+the	dlxos.o	58
+the	os.dlx	57
+the	os.dlx	65
+the	os.dlx	11667
+the	os.dlx	11668
+the	os.lst	55
+the	os.lst	61
+the	os.lst	12461
+the	os.lst	12462
+this	dlxos.o	184
+this	os.dlx	191
+this	os.lst	185
+though	dlxos.o	183
+though	os.dlx	190
+though	os.lst	184
 trap_random.o	Makefile	/^trap_random.o: trap_random.s$/
 u	filesys.h	61
 uint32	dlxos.h	10
 userprog	Makefile	/^userprog : userprog.o usertraps.o$/
 usertraps.o	Makefile	/^usertraps.o: usertraps.s$/
+uses	dlxos.o	181
+uses	os.dlx	188
+uses	os.lst	182
 waitQueue	process.c	31
 waiting	synch.h	20
 waiting	synch.working.h	20
+way	dlxos.o	53
+way	os.dlx	60
+way	os.lst	57
+words	dlxos.o	184
+words	os.dlx	191
+words	os.lst	185
+x0f	dlxos.o	301
+x0f	dlxos.o	308
+x0f	os.dlx	308
+x0f	os.dlx	315
+x0f	os.lst	297
+x0f	os.lst	304
+x2000	userprog.dlx	7
+x2000	userprog.lst	8
+x410	dlxos.o	332
+x410	os.dlx	339
+x410	os.lst	327
+xb000	os.dlx	7
+xb000	os.lst	8
+xfff0	dlxos.o	304
+xfff0	os.dlx	311
+xfff0	os.lst	300
 zombieQueue	process.c	35
