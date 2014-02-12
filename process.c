@@ -654,8 +654,8 @@ ProcessGetFromFile (int fd, unsigned char *buf, uint32 *addr, int max)
 }
 
  /*Sudarshan Sargur*/
-int Getpid()
-{ printf("Current PCB %d \n  pcbs  %d ",currentPCB,pcbs);
+int Get_pid()
+{ dbprintf("Current PCB %d \n  pcbs  %d ",currentPCB,pcbs);
   
 	return (currentPCB-pcbs);
 }

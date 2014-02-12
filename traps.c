@@ -218,7 +218,7 @@ dointerrupt (unsigned int cause, unsigned int iar, unsigned int isr,
     case TRAP_GETPID:
 		
       dbprintf ('t', "Got a process ID  trap!\n");
-      ProcessSetResult (currentPCB,Getpid());
+      ProcessSetResult (currentPCB,Get_pid());
 	
 	break;
 

@@ -66,5 +66,5 @@ extern void	ProcessWakeup (PCB *);
 extern void	ProcessSetResult (PCB *, uint32);
 extern void	ProcessSleep ();
 /*Sudarshan Sargur*/
-extern int  	Getpid();
+extern int  	Get_pid();
 #endif	/* _process_h_ */
